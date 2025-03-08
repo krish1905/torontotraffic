@@ -1,0 +1,1077 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Toronto Traffic Safety Initiative</title>
+    <style>
+        /* Enhanced Modern Apple-style CSS */
+        :root {
+            --primary-color: #007AFF;
+            --primary-dark: #0051A8;
+            --text-color: #1D1D1F;
+            --background-light: #F5F5F7;
+            --section-spacing: 120px;
+            --card-shadow: 0 10px 30px -10px rgba(0,0,0,0.1);
+            --transition-smooth: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            color: var(--text-color);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        .hero {
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            background: linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.7)), url('https://images.unsplash.com/photo-1494783367193-149034c05e8f?ixlib=rb-1.2.1&auto=format&fit=crop&w=2850&q=80');
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+            color: white;
+            padding: 20px;
+            position: relative;
+        }
+
+        .hero::after {
+            content: '↓';
+            position: absolute;
+            bottom: 30px;
+            left: 50%;
+            transform: translateX(-50%);
+            font-size: 2rem;
+            animation: bounce 2s infinite;
+        }
+
+        @keyframes bounce {
+            0%, 20%, 50%, 80%, 100% {
+                transform: translateY(0) translateX(-50%);
+            }
+            40% {
+                transform: translateY(-30px) translateX(-50%);
+            }
+            60% {
+                transform: translateY(-15px) translateX(-50%);
+            }
+        }
+
+        .hero h1 {
+            font-size: 4.5rem;
+            margin-bottom: 20px;
+            font-weight: 700;
+            background: linear-gradient(120deg, #007AFF, #00C7FF);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            text-shadow: 0 2px 10px rgba(0,122,255,0.3);
+        }
+
+        .hero p {
+            font-size: 1.5rem;
+            max-width: 800px;
+            margin: 0 auto;
+            line-height: 1.8;
+        }
+
+        section {
+            padding: var(--section-spacing) 20px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .section-light {
+            background-color: var(--background-light);
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 1;
+        }
+
+        h2 {
+            font-size: 3rem;
+            margin-bottom: 40px;
+            text-align: center;
+            background: linear-gradient(120deg, var(--primary-color), var(--primary-dark));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            position: relative;
+            display: inline-block;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+
+        h2::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 0;
+            width: 100%;
+            height: 3px;
+            background: linear-gradient(90deg, transparent, var(--primary-color), transparent);
+        }
+
+        h3 {
+            font-size: 1.8rem;
+            margin-bottom: 20px;
+            color: var(--primary-color);
+            transition: var(--transition-smooth);
+        }
+
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 40px;
+            margin-top: 60px;
+        }
+
+        .visualization {
+            background: white;
+            border-radius: 20px;
+            padding: 30px;
+            box-shadow: var(--card-shadow);
+            transition: var(--transition-smooth);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .visualization::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(45deg, transparent, rgba(0,122,255,0.03));
+            opacity: 0;
+            transition: var(--transition-smooth);
+        }
+
+        .visualization:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px -20px rgba(0,122,255,0.3);
+        }
+
+        .visualization:hover::before {
+            opacity: 1;
+        }
+
+        .visualization:hover h3 {
+            transform: translateX(10px);
+        }
+
+        .visualization img {
+            width: 100%;
+            height: auto;
+            border-radius: 10px;
+            margin-bottom: 20px;
+            transition: var(--transition-smooth);
+            box-shadow: 0 5px 15px -5px rgba(0,0,0,0.1);
+        }
+
+        .visualization:hover img {
+            transform: scale(1.02);
+        }
+
+        .map-container {
+            width: 100%;
+            height: 600px;
+            margin: 40px 0;
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: var(--card-shadow);
+            transition: var(--transition-smooth);
+        }
+
+        .map-container:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 40px -20px rgba(0,122,255,0.3);
+        }
+
+        .map-container iframe {
+            width: 100%;
+            height: 100%;
+            border: none;
+        }
+
+        .solution-card {
+            background: white;
+            border-radius: 20px;
+            padding: 40px;
+            margin-bottom: 30px;
+            box-shadow: var(--card-shadow);
+            transition: var(--transition-smooth);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .solution-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 4px;
+            height: 100%;
+            background: var(--primary-color);
+            transition: var(--transition-smooth);
+        }
+
+        .solution-card:hover {
+            transform: translateX(10px);
+            box-shadow: 0 20px 40px -20px rgba(0,122,255,0.3);
+        }
+
+        .solution-card:hover::before {
+            width: 8px;
+        }
+
+        .stats {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+            margin: 40px 0;
+        }
+
+        .stat-card {
+            background: linear-gradient(135deg, var(--primary-color), var(--primary-dark));
+            color: white;
+            padding: 30px;
+            border-radius: 15px;
+            text-align: center;
+            transition: var(--transition-smooth);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .stat-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(45deg, transparent, rgba(255,255,255,0.1));
+            opacity: 0;
+            transition: var(--transition-smooth);
+        }
+
+        .stat-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .stat-card:hover::before {
+            opacity: 1;
+        }
+
+        .stat-card h4 {
+            font-size: 3rem;
+            margin-bottom: 10px;
+            text-shadow: 0 2px 10px rgba(0,0,0,0.2);
+        }
+
+        .risk-list {
+            list-style: none;
+            margin: 20px 0;
+            padding: 0;
+        }
+
+        .risk-list li {
+            padding: 15px;
+            margin-bottom: 10px;
+            background: white;
+            border-radius: 10px;
+            box-shadow: var(--card-shadow);
+            transition: var(--transition-smooth);
+        }
+
+        .risk-list li:hover {
+            transform: translateX(10px);
+            box-shadow: 0 10px 20px -10px rgba(0,122,255,0.2);
+        }
+
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+            
+            .hero p {
+                font-size: 1.2rem;
+            }
+
+            section {
+                padding: calc(var(--section-spacing) / 2) 20px;
+            }
+
+            h2 {
+                font-size: 2rem;
+            }
+        }
+
+        /* New CSS for additional content */
+        .nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            background: rgba(255,255,255,0.95);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            z-index: 1000;
+            padding: 20px;
+            box-shadow: 0 2px 20px rgba(0,0,0,0.1);
+            transform: translateY(0);
+            transition: transform 0.3s ease;
+        }
+
+        .nav.hidden {
+            transform: translateY(-100%);
+        }
+
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 30px;
+        }
+
+        .nav-links a {
+            color: var(--text-color);
+            text-decoration: none;
+            font-weight: 500;
+            transition: var(--transition-smooth);
+        }
+
+        .nav-links a:hover {
+            color: var(--primary-color);
+        }
+
+        .timeline {
+            position: relative;
+            max-width: 800px;
+            margin: 60px auto;
+            padding: 20px;
+        }
+
+        .timeline::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 50%;
+            width: 2px;
+            height: 100%;
+            background: var(--primary-color);
+            transform: translateX(-50%);
+        }
+
+        .timeline-item {
+            margin-bottom: 60px;
+            position: relative;
+            width: calc(50% - 30px);
+        }
+
+        .timeline-item:nth-child(odd) {
+            left: 0;
+        }
+
+        .timeline-item:nth-child(even) {
+            left: 50%;
+            transform: translateX(30px);
+        }
+
+        .timeline-content {
+            background: white;
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: var(--card-shadow);
+            position: relative;
+        }
+
+        .timeline-content::before {
+            content: '';
+            position: absolute;
+            top: 20px;
+            width: 20px;
+            height: 20px;
+            background: var(--primary-color);
+            border-radius: 50%;
+        }
+
+        .timeline-item:nth-child(odd) .timeline-content::before {
+            right: -40px;
+        }
+
+        .timeline-item:nth-child(even) .timeline-content::before {
+            left: -40px;
+        }
+
+        .methodology-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+            margin: 40px 0;
+        }
+
+        .methodology-card {
+            background: white;
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: var(--card-shadow);
+            transition: var(--transition-smooth);
+        }
+
+        .methodology-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 40px -20px rgba(0,122,255,0.3);
+        }
+
+        .impact-stats {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 30px;
+            margin: 40px 0;
+        }
+
+        .impact-card {
+            background: white;
+            padding: 30px;
+            border-radius: 15px;
+            text-align: center;
+            box-shadow: var(--card-shadow);
+            transition: var(--transition-smooth);
+        }
+
+        .impact-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 40px -20px rgba(0,122,255,0.3);
+        }
+
+        .impact-number {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: var(--primary-color);
+            margin-bottom: 10px;
+        }
+
+        footer {
+            background: var(--text-color);
+            color: white;
+            padding: 60px 20px;
+        }
+
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 40px;
+        }
+
+        .footer-section h4 {
+            font-size: 1.2rem;
+            margin-bottom: 20px;
+            color: var(--primary-color);
+        }
+
+        .footer-section p, .footer-section a {
+            color: rgba(255,255,255,0.8);
+            margin-bottom: 10px;
+            text-decoration: none;
+            display: block;
+            transition: var(--transition-smooth);
+        }
+
+        .footer-section a:hover {
+            color: white;
+            transform: translateX(5px);
+        }
+
+        .copyright {
+            text-align: center;
+            padding-top: 40px;
+            color: rgba(255,255,255,0.6);
+            border-top: 1px solid rgba(255,255,255,0.1);
+            margin-top: 40px;
+        }
+
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+            }
+
+            .timeline::before {
+                left: 30px;
+            }
+
+            .timeline-item {
+                width: calc(100% - 60px);
+                left: 60px !important;
+            }
+
+            .timeline-item:nth-child(even) {
+                transform: translateX(0);
+            }
+
+            .timeline-content::before {
+                left: -40px !important;
+            }
+        }
+
+        /* Add new CSS for the SPPS components */
+        .spps-components {
+            margin: 60px 0;
+        }
+
+        .spps-header {
+            text-align: center;
+            margin-bottom: 60px;
+        }
+
+        .spps-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 40px;
+            margin: 40px 0;
+        }
+
+        .spps-card {
+            background: white;
+            padding: 40px;
+            border-radius: 20px;
+            box-shadow: var(--card-shadow);
+            transition: var(--transition-smooth);
+            position: relative;
+            overflow: hidden;
+            text-align: center;
+        }
+
+        .spps-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px -20px rgba(0,122,255,0.3);
+        }
+
+        .spps-icon {
+            width: 80px;
+            height: 80px;
+            background: var(--primary-color);
+            border-radius: 50%;
+            margin: 0 auto 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 2rem;
+        }
+
+        .spps-card h3 {
+            color: var(--text-color);
+            margin-bottom: 20px;
+        }
+
+        .spps-card p {
+            color: #666;
+            line-height: 1.6;
+        }
+
+        @media (max-width: 968px) {
+            .spps-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .strategy-section {
+            margin: 60px 0;
+        }
+
+        .strategy-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 40px;
+            margin: 40px 0;
+        }
+
+        .strategy-card {
+            background: white;
+            padding: 40px;
+            border-radius: 20px;
+            box-shadow: var(--card-shadow);
+            transition: var(--transition-smooth);
+            position: relative;
+            overflow: hidden;
+            border: 1px solid rgba(0,0,0,0.1);
+        }
+
+        .strategy-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px -20px rgba(0,122,255,0.3);
+            border-color: var(--primary-color);
+        }
+
+        .strategy-icon {
+            width: 100px;
+            height: 100px;
+            background: var(--background-light);
+            border-radius: 50%;
+            margin: 0 auto 30px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: var(--transition-smooth);
+        }
+
+        .strategy-icon svg {
+            width: 50px;
+            height: 50px;
+            fill: var(--primary-color);
+        }
+
+        .strategy-card:hover .strategy-icon {
+            background: var(--primary-color);
+        }
+
+        .strategy-card:hover .strategy-icon svg {
+            fill: white;
+        }
+
+        .strategy-card h3 {
+            font-size: 1.6rem;
+            margin-bottom: 20px;
+            color: var(--text-color);
+            transition: var(--transition-smooth);
+        }
+
+        .strategy-card p {
+            color: #666;
+            line-height: 1.6;
+        }
+
+        .highlight {
+            color: var(--primary-color);
+            font-weight: 600;
+        }
+
+        @media (max-width: 968px) {
+            .strategy-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .effectiveness-section {
+            padding: 60px 0;
+        }
+
+        .effectiveness-grid {
+            display: grid;
+            grid-template-columns: 1fr 1.5fr;
+            gap: 60px;
+            align-items: center;
+        }
+
+        .effectiveness-content {
+            padding: 40px;
+            background: white;
+            border-radius: 20px;
+            box-shadow: var(--card-shadow);
+        }
+
+        .effectiveness-content h3 {
+            margin-bottom: 30px;
+        }
+
+        .effectiveness-graph {
+            background: white;
+            padding: 40px;
+            border-radius: 20px;
+            box-shadow: var(--card-shadow);
+        }
+
+        .effectiveness-graph img {
+            width: 100%;
+            height: auto;
+            border-radius: 10px;
+        }
+
+        @media (max-width: 968px) {
+            .effectiveness-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <nav class="nav">
+        <div class="nav-container">
+            <div class="logo">Toronto Traffic Safety</div>
+            <div class="nav-links">
+                <a href="#challenge">Challenge</a>
+                <a href="#analysis">Analysis</a>
+                <a href="#intersections">Intersections</a>
+                <a href="#solution">Solution</a>
+                <a href="#impact">Impact</a>
+            </div>
+        </div>
+    </nav>
+
+    <div class="hero">
+        <div>
+            <h1>Toronto Traffic Safety Initiative</h1>
+            <p>Transforming urban mobility through data-driven solutions for a safer, smarter, and more sustainable future.</p>
+        </div>
+    </div>
+
+    <section>
+        <div class="container">
+            <h2>The Challenge</h2>
+            <p>Urban centers like Toronto face increasing pressure from growing populations, rising vehicle usage, and the urgent need for sustainability. Our mission is to analyze and optimize traffic flow to improve transportation efficiency, safety, and sustainability through innovative data-driven solutions.</p>
+            
+            <div class="stats">
+                <div class="stat-card">
+                    <h4>30%</h4>
+                    <p>Reduction in accidents with upgraded traffic signals</p>
+                </div>
+                <div class="stat-card">
+                    <h4>78%</h4>
+                    <p>Reduction in severe crashes with roundabouts</p>
+                </div>
+                <div class="stat-card">
+                    <h4>15%</h4>
+                    <p>Fewer collisions with automated enforcement</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="section-light">
+        <div class="container">
+            <h2>Traffic Patterns & Analysis</h2>
+            <div class="grid">
+                <div class="visualization">
+                    <h3>Daily Traffic Patterns</h3>
+                    <img src="day_of_week_vehicles.png" alt="Vehicle traffic by day">
+                    <p>Analysis shows peak congestion Tuesday through Thursday, with moderate traffic on Saturdays and lowest volume on Sundays.</p>
+                </div>
+                <div class="visualization">
+                    <h3>Vulnerable Road Users</h3>
+                    <img src="day_of_week_vulnerable.png" alt="Vulnerable road users by day">
+                    <p>Pedestrian and cyclist activity peaks during weekdays, particularly during school and work commute hours.</p>
+                </div>
+                <div class="visualization">
+                    <h3>Hourly Patterns</h3>
+                    <img src="hourly_vulnerable.png" alt="Hourly vulnerable road users">
+                    <p>Peak activity occurs between 8-10 AM and 3-7 PM, with the highest volume during the 5-6 PM rush hour.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section>
+        <div class="container">
+            <h2>High-Risk Intersections</h2>
+            <h3>Top Intersections by Volume</h3>
+            <div class="risk-list">
+                <li>Bloor St W / Major St W - Over 400,000 pedestrian and cyclist movements</li>
+                <li>Bloor St W / Avenue W - High foot traffic near major transit routes</li>
+                <li>Bloor St W / Madison Cres - Heavy commuter and student pedestrian volume</li>
+                <li>Bloor St W / Spadina Ave - Significant mix of vehicle and pedestrian activity</li>
+                <li>Bloor St W / Bathurst St W - High risk for pedestrian-vehicle conflicts</li>
+            </div>
+            
+            <h3>Top Intersections by Pedestrian-to-Vehicle Ratio</h3>
+            <div class="risk-list">
+                <li>Shaw St / Essex St - Extremely high pedestrian-to-vehicle ratio</li>
+                <li>Argyle St / Argyle Pl - More pedestrians than vehicles</li>
+                <li>Ontario St / Winchester St - High pedestrian priority potential</li>
+                <li>Kensington Ave / Baldwin St - Located in pedestrian-heavy market area</li>
+                <li>Kensington Ave / St Andrew St - High cyclist and pedestrian usage</li>
+            </div>
+            
+            <div class="grid">
+                <div class="visualization">
+                    <h3>Top Vulnerable Volume</h3>
+                    <img src="top_10_intersections_vulnerable.png" alt="Top 10 intersections by vulnerable users">
+                    <p>Analysis of intersections with the highest volume of pedestrian and cyclist traffic.</p>
+                </div>
+                <div class="visualization">
+                    <h3>Vulnerability Ratio</h3>
+                    <img src="top_10_intersections_ratio.png" alt="Top 10 intersections by vulnerability ratio">
+                    <p>Areas with the highest ratio of vulnerable road users to vehicles, indicating potential pedestrian zones.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="section-light">
+        <div class="container">
+            <h2>Interactive Traffic Map</h2>
+            <div class="map-container">
+                <iframe src="Toronto_Traffic_Animation.html" title="Traffic Animation"></iframe>
+            </div>
+        </div>
+    </section>
+
+    <section>
+        <div class="container">
+            <h2>What the Smart Pedestrian Protection System Will Do</h2>
+            <div class="spps-components">
+                <div class="spps-grid">
+                    <div class="spps-card">
+                        <div class="spps-icon">🔄</div>
+                        <h3>Automation</h3>
+                        <p><strong>AI-Driven Adaptive Smart Signals:</strong> Real-time pedestrian detection adjusts crossing times and optimizes vehicle flow.</p>
+                    </div>
+                    <div class="spps-card">
+                        <div class="spps-icon">🛡️</div>
+                        <h3>Prevention</h3>
+                        <p><strong>Red-Light Guardian System:</strong> Prevents pedestrian-vehicle collisions by extending red lights when pedestrians are detected.</p>
+                    </div>
+                    <div class="spps-card">
+                        <div class="spps-icon">💡</div>
+                        <h3>Visibility</h3>
+                        <p><strong>Smart Crosswalks with LED Alerts:</strong> Embedded LED crosswalks signal drivers and pedestrians in high-risk situations.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section>
+        <div class="container">
+            <h2>How Effective is SPPS?</h2>
+            <div class="effectiveness-grid">
+                <div class="effectiveness-content">
+                    <h3>Predictive Algorithm Impact</h3>
+                    <p>By implementing a predictive algorithm to determine collision factors, our system has demonstrated the potential for a <span class="highlight">35% reduction</span> in collision rates. This significant improvement is achieved through:</p>
+                    <ul>
+                        <li>Real-time traffic pattern analysis</li>
+                        <li>Automated risk assessment</li>
+                        <li>Proactive safety measure deployment</li>
+                        <li>Continuous system learning and adaptation</li>
+                    </ul>
+                </div>
+                <div class="effectiveness-graph">
+                    <img src="collision_risk_graph.png" alt="Graph showing collision risk before and after intervention">
+                    <p class="text-center">Collision Risk Reduction Analysis</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section>
+        <div class="container">
+            <h2>Why This Strategy Will Work</h2>
+            <div class="strategy-grid">
+                <div class="strategy-card">
+                    <div class="strategy-icon">
+                        <svg viewBox="0 0 24 24">
+                            <path d="M3,3H21V21H3V3M7,17H9V10H7V17M11,17H13V7H11V17M15,17H17V13H15V17Z"/>
+                        </svg>
+                    </div>
+                    <h3>Minimal Infrastructure Disruption</h3>
+                    <p>Integrates with Toronto's existing <span class="highlight">SCATS system</span>, making it a <span class="highlight">cost-effective</span> and <span class="highlight">scalable</span> solution.</p>
+                </div>
+                <div class="strategy-card">
+                    <div class="strategy-icon">
+                        <svg viewBox="0 0 24 24">
+                            <path d="M12,2A10,10 0 0,0 2,12A10,10 0 0,0 12,22A10,10 0 0,0 22,12A10,10 0 0,0 12,2M12,4A8,8 0 0,1 20,12A8,8 0 0,1 12,20A8,8 0 0,1 4,12A8,8 0 0,1 12,4M11,17H13V11H11V17M11,9H13V7H11V9Z"/>
+                        </svg>
+                    </div>
+                    <h3>Proven Global Success</h3>
+                    <p>Singapore's <span class="highlight">GLIDE system</span> reduced pedestrian-vehicle collisions by <span class="highlight">35%</span>, demonstrating the effectiveness of this approach.</p>
+                </div>
+                <div class="strategy-card">
+                    <div class="strategy-icon">
+                        <svg viewBox="0 0 24 24">
+                            <path d="M12,3C17.5,3 22,6.58 22,11C22,15.42 17.5,19 12,19C10.76,19 9.57,18.82 8.47,18.5C5.55,21 2,21 2,21C4.33,18.67 4.7,17.1 4.75,16.5C3.05,15.07 2,13.13 2,11C2,6.58 6.5,3 12,3Z"/>
+                        </svg>
+                    </div>
+                    <h3>Data-Driven Risk Detection</h3>
+                    <p>Uses <span class="highlight">AI & IoT sensors</span> to analyze real-time traffic and pedestrian flow, ensuring safety measures are deployed where needed most.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section>
+        <div class="container">
+            <h2>Our Methodology</h2>
+            <div class="methodology-grid">
+                <div class="methodology-card">
+                    <h3>Data Collection</h3>
+                    <p>Comprehensive traffic data collection from multiple sources including:</p>
+                    <ul>
+                        <li>Traffic cameras and sensors</li>
+                        <li>Pedestrian counters</li>
+                        <li>Historical accident reports</li>
+                        <li>Public transit data</li>
+                    </ul>
+                </div>
+                <div class="methodology-card">
+                    <h3>Analysis Techniques</h3>
+                    <p>Advanced data analysis methods including:</p>
+                    <ul>
+                        <li>Machine learning algorithms</li>
+                        <li>Pattern recognition</li>
+                        <li>Predictive modeling</li>
+                        <li>Risk assessment frameworks</li>
+                    </ul>
+                </div>
+                <div class="methodology-card">
+                    <h3>Validation Process</h3>
+                    <p>Rigorous validation through:</p>
+                    <ul>
+                        <li>Cross-referencing multiple data sources</li>
+                        <li>Statistical significance testing</li>
+                        <li>Expert consultation</li>
+                        <li>Community feedback</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section>
+        <div class="container">
+            <h2>Implementation Timeline</h2>
+            <div class="timeline">
+                <div class="timeline-item">
+                    <div class="timeline-content">
+                        <h3>Phase 1: Initial Deployment</h3>
+                        <p>Implementation of AI-driven smart signals at top 5 high-risk intersections</p>
+                    </div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-content">
+                        <h3>Phase 2: Infrastructure Updates</h3>
+                        <p>Installation of LED crosswalks and protected bike lanes</p>
+                    </div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-content">
+                        <h3>Phase 3: System Integration</h3>
+                        <p>Integration of Red-Light Guardian System with existing infrastructure</p>
+                    </div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-content">
+                        <h3>Phase 4: Full Deployment</h3>
+                        <p>Citywide rollout of complete Smart Pedestrian Protection System</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="section-light">
+        <div class="container">
+            <h2 id="impact">Projected Impact</h2>
+            <div class="impact-stats">
+                <div class="impact-card">
+                    <div class="impact-number">45%</div>
+                    <p>Reduction in pedestrian-vehicle conflicts at smart intersections</p>
+                </div>
+                <div class="impact-card">
+                    <div class="impact-number">30%</div>
+                    <p>Decrease in average wait times for all road users</p>
+                </div>
+                <div class="impact-card">
+                    <div class="impact-number">25%</div>
+                    <p>Reduction in emissions from improved traffic flow</p>
+                </div>
+                <div class="impact-card">
+                    <div class="impact-number">60%</div>
+                    <p>Increase in cyclist safety at protected intersections</p>
+                </div>
+            </div>
+            
+            <div class="methodology-card">
+                <h3>Environmental Impact</h3>
+                <p>Our solution contributes to Toronto's sustainability goals through:</p>
+                <ul>
+                    <li>Reduced vehicle idling time and emissions</li>
+                    <li>Promotion of active transportation</li>
+                    <li>Support for electric vehicle adoption</li>
+                    <li>Integration with green infrastructure initiatives</li>
+                </ul>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h4>About the Initiative</h4>
+                    <p>The Toronto Traffic Safety Initiative is a comprehensive program aimed at transforming urban mobility through data-driven solutions.</p>
+                </div>
+                <div class="footer-section">
+                    <h4>Quick Links</h4>
+                    <a href="#challenge">The Challenge</a>
+                    <a href="#analysis">Traffic Analysis</a>
+                    <a href="#solution">Our Solution</a>
+                    <a href="#impact">Impact</a>
+                </div>
+                <div class="footer-section">
+                    <h4>Resources</h4>
+                    <a href="#">Documentation</a>
+                    <a href="#">Research Papers</a>
+                    <a href="#">Case Studies</a>
+                    <a href="#">Data Sources</a>
+                </div>
+                <div class="footer-section">
+                    <h4>Contact</h4>
+                    <p>Email: info@torontotraffic.org</p>
+                    <p>Phone: (416) 555-0123</p>
+                    <p>Address: Toronto, ON, Canada</p>
+                </div>
+            </div>
+            <div class="copyright">
+                <p>© 2024 Toronto Traffic Safety Initiative. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Navigation hide/show on scroll
+        let lastScroll = 0;
+        const nav = document.querySelector('.nav');
+        
+        window.addEventListener('scroll', () => {
+            const currentScroll = window.pageYOffset;
+            
+            if (currentScroll <= 0) {
+                nav.classList.remove('hidden');
+                return;
+            }
+            
+            if (currentScroll > lastScroll && !nav.classList.contains('hidden')) {
+                nav.classList.add('hidden');
+            } else if (currentScroll < lastScroll && nav.classList.contains('hidden')) {
+                nav.classList.remove('hidden');
+            }
+            
+            lastScroll = currentScroll;
+        });
+    </script>
+</body>
+</html> 
