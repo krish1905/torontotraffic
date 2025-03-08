@@ -10,33 +10,6 @@ A modern, interactive website showcasing Toronto's traffic safety analysis and t
 - Smart Pedestrian Protection System details
 - Implementation timeline and impact analysis
 
-## Deployment
-
-This project is configured for deployment with Vercel. To deploy:
-
-1. Install the Vercel CLI:
-```bash
-npm install -g vercel
-```
-
-2. Login to Vercel:
-```bash
-vercel login
-```
-
-3. Deploy the project:
-```bash
-vercel
-```
-
-## Local Development
-
-To run the project locally:
-
-1. Clone the repository
-2. Open `index.html` in your browser
-3. All visualization files should be in the same directory as `index.html`
-
 ## Required Files
 
 Ensure the following files are present in the project:
